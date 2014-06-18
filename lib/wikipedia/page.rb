@@ -29,7 +29,9 @@ module Wikipedia
     end
 
     def title
-      page['title']
+      if self.raw_data["query"]["pages"].keys.length > 0
+          return "#{Wikipedia::Configuration['protocol']}://#{Wikipedia::Configuration['domain']}/wiki/#{URI.encode(self.title)}?curid=#{self.raw_data["query"]["pages"].keys[0]}"
+      end
     end
 
     def fullurl
